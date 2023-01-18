@@ -1,6 +1,6 @@
 from controll_constants import *
 # initialize ROM
-ROM = ["0" for _ in range(0x2000)]
+ROM = ["7" for _ in range(0x2000)]
 
 # Fetch instruction
 for i in range(0x3ff+1):
@@ -61,10 +61,25 @@ ROM[0b001_00001001_01] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # Jz
 ROM[0b001_00001001_10] = st(IR_RESET  | S1 | S2)   # NOP
 ROM[0b001_00001001_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # Jz #imediate
 
-ROM[0b001_00001001_00] = st(IR_RESET  | S1 | S2)   # NOP
-ROM[0b001_00001001_01] = st(IR_RESET  | S1 | S2)   # NOP
-ROM[0b001_00001001_10] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JC #imediate
-ROM[0b001_00001001_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JC #imediate
+ROM[0b001_00001010_00] = st(IR_RESET  | S1 | S2)   # NOP
+ROM[0b001_00001010_01] = st(IR_RESET  | S1 | S2)   # NOP
+ROM[0b001_00001010_10] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JC #imediate
+ROM[0b001_00001010_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JC #imediate
+
+ROM[0b001_00001011_00] = st(S2 | S1 | R_OUT | A_IN)   # LDA $indirect 0
+ROM[0b001_00001011_01] = st(S2 | S1 | R_OUT | A_IN)   # LDA $indirect 0
+ROM[0b001_00001011_10] = st(S2 | S1 | R_OUT | A_IN)   # LDA $indirect 0
+ROM[0b001_00001011_11] = st(S2 | S1 | R_OUT | A_IN)   # LDA $indirect 0
+
+ROM[0b010_00001011_00] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # LDA $indirect 1
+ROM[0b010_00001011_01] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # LDA $indirect 1
+ROM[0b010_00001011_10] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # LDA $indirect 1
+ROM[0b010_00001011_11] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # LDA $indirect 1
+
+ROM[0b010_00001011_00] = st(S1 | S2 | IR_RESET | R_OUT | )   # STA #ADDRESS
+ROM[0b010_00001011_01] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # STA #ADDRESS
+ROM[0b010_00001011_10] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # STA #ADDRESS
+ROM[0b010_00001011_11] = st(S2 | R_OUT | A_IN | IR_RESET | IP_SEL)   # STA #ADDRESS
 
 with open("ROM", "w") as file: # Writing to the file
     ROM.insert(0,"v2.0")
