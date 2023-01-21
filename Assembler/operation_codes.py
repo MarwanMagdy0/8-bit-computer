@@ -9,7 +9,7 @@ NOP  = 0b00000111
 JMP  = 0b00001000
 JZ   = 0b00001001
 JC   = 0b00001010
-
+STA  = 0b00001100
 def op_from_str2hex(op):
     if op == "LDA":
         return "0"
