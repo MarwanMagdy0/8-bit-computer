@@ -1,35 +1,45 @@
+indx=0
+def shift():
+    # a shifter function shifts 1 each time it is called
+    # ex:
+    #   1 10 100 1000 10000
+    global indx
+    if indx ==0:
+        indx=1
+    else:
+        indx *=2
+    print(str(bin(indx))[2:], len(str(bin(indx))[2:]))
+    return indx
+
 # ALU CONTROLL
-Z_A         = 0b000000000000000000000001
-CPL_A       = 0b000000000000000000000010
-Z_D         = 0b000000000000000000000100
-CPL_D       = 0b000000000000000000001000
-ALU_OUT_CPL = 0b000000000000000000010000
-ADD_A_D     = 0b000000000000000000000000
-AND_A_D     = 0b000000000000000000100000
-EN_ALU_OUT  = 0b000000000000000001000000
+Z_A         = shift()
+CPL_A       = shift()
+Z_D         = shift()
+CPL_D       = shift()
+ALU_OUT_CPL = shift()
+AND_A_D     = shift()
+EN_ALU_OUT  = shift()
 
 # REGISTER CONTROLL
-A_IN        = 0b000000000000000010000000
-A_OUT       = 0b000000000000000100000000
-ALU_TO_A    = 0b000000000000001000000000
-X_IN        = 0b000000000000010000000000
-X_OUT       = 0b000000000000100000000000
-Y_IN        = 0b000000000001000000000000
-Y_OUT       = 0b000000000010000000000000
+A_IN        = shift()
+A_OUT       = shift()
+ALU_TO_A    = shift()
+X_IN        = shift()
+X_OUT       = shift()
+Y_IN        = shift()
+Y_OUT       = shift()
 
 # COUNTERS AND RAM CONTROLL
-S1          = 0b000000000100000000000000
-S2          = 0b000000001000000000000000
-IP_SEL      = 0b000000010000000000000000
-IP_COUNT    = 0b000000000000000000000000
-IP_INP      = 0b000000100000000000000000
-R_OUT       = 0b000001000000000000000000
-R_INP       = 0b000010000000000000000000
-FLAGS_SEL   = 0b000100000000000000000000
-SP_SEL      = 0b001000000000000000000000
-SP_INC      = 0b010000000000000000000000
-SP_DEC      = 0b000000000000000000000000
-IR_RESET    = 0b100000000000000000000000
+S1          = shift()
+S2          = shift()
+IP_SEL      = shift()
+IP_INP      = shift()
+R_OUT       = shift()
+R_INP       = shift()
+FLAGS_SEL   = shift()
+SP_SEL      = shift()
+SP_INC      = shift()
+IR_RESET    = shift()
 
 def st(instruction):
     return str(hex(instruction))[2:]
