@@ -1,19 +1,29 @@
-LDA    = 0b00000000
-LDX    = 0b00000001
-LDY    = 0b00000010
-ADDX   = 0b00000011
-SUBX   = 0b00000100
-ADDY   = 0b00000101
-SUBY   = 0b00000110
-NOP    = 0b00000111
-JMP    = 0b00001000
-JZ     = 0b00001001
-JC     = 0b00001010
-LDA_IN = 0b00001011
-STA    = 0b00001100
-STA_IN = 0b00001100
-INA    = 0b00001101
-DEA    = 0b00001110
+op=-1
+def operation_code():
+    global op
+    op+=1
+    return op
+LDA    = operation_code()
+LDX    = operation_code()
+LDY    = operation_code()
+ADDX   = operation_code()
+SUBX   = operation_code()
+ADDY   = operation_code()
+SUBY   = operation_code()
+NOP    = operation_code()
+JMP    = operation_code()
+JZ     = operation_code()
+JC     = operation_code()
+LDA_IN = operation_code()
+STA    = operation_code()
+STA_IN = STA
+INA    = operation_code()
+DEA    = operation_code()
+ADD    = operation_code()
+ANDX   = operation_code()
+AND    = operation_code()
+LDAX   = operation_code()
+OUT    = operation_code()
 def op_from_str2hex(op):
     return str(hex(eval(op)))[2:]
 

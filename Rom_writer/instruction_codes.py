@@ -95,7 +95,48 @@ ROM[0b001_00001110_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_A | A_IN | Z
 ROM[0b001_00001110_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_A | A_IN | Z_D | CPL_D)   # DEA
 ROM[0b001_00001110_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_A | A_IN | Z_D | CPL_D)   # DEA
 ROM[0b001_00001110_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_A | A_IN | Z_D | CPL_D)   # DEA
-with open("ROM", "w") as file: # Writing to the file
+
+ROM[0b001_00001111_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL)   # ADD #imediate
+ROM[0b001_00001111_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL)   # ADD #imediate
+ROM[0b001_00001111_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL)   # ADD #imediate
+ROM[0b001_00001111_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL)   # ADD #imediate
+
+ROM[0b001_00010000_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | ALU_TO_A | A_IN | AND_A_D)   # ANDX
+ROM[0b001_00010000_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | ALU_TO_A | A_IN | AND_A_D)   # ANDX
+ROM[0b001_00010000_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | ALU_TO_A | A_IN | AND_A_D)   # ANDX
+ROM[0b001_00010000_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | ALU_TO_A | A_IN | AND_A_D)   # ANDX
+
+ROM[0b001_00010001_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL | AND_A_D)   # AND #imediate
+ROM[0b001_00010001_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL | AND_A_D)   # AND #imediate
+ROM[0b001_00010001_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL | AND_A_D)   # AND #imediate
+ROM[0b001_00010001_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | ALU_TO_A | A_IN | IP_SEL | AND_A_D)   # AND #imediate
+
+ROM[0b001_00010010_00] = st(S2 | S1 | R_OUT | A_IN)   # LDAX $indirect 0
+ROM[0b001_00010010_01] = st(S2 | S1 | R_OUT | A_IN)   # LDAX $indirect 0
+ROM[0b001_00010010_10] = st(S2 | S1 | R_OUT | A_IN)   # LDAX $indirect 0
+ROM[0b001_00010010_11] = st(S2 | S1 | R_OUT | A_IN)   # LDAX $indirect 0
+
+ROM[0b010_00010010_00] = st(S2 | S1 | X_OUT | ALU_TO_A | A_IN)   # LDAX $indirect 1
+ROM[0b010_00010010_01] = st(S2 | S1 | X_OUT | ALU_TO_A | A_IN)   # LDAX $indirect 1
+ROM[0b010_00010010_10] = st(S2 | S1 | X_OUT | ALU_TO_A | A_IN)   # LDAX $indirect 1
+ROM[0b010_00010010_11] = st(S2 | S1 | X_OUT | ALU_TO_A | A_IN)   # LDAX $indirect 1
+
+ROM[0b011_00010010_00] = st(S1 | R_OUT | A_IN | IR_RESET | IP_SEL | Z_D)   # LDAX $indirect 2
+ROM[0b011_00010010_01] = st(S1 | R_OUT | A_IN | IR_RESET | IP_SEL | Z_D)   # LDAX $indirect 2
+ROM[0b011_00010010_10] = st(S1 | R_OUT | A_IN | IR_RESET | IP_SEL | Z_D)   # LDAX $indirect 2
+ROM[0b011_00010010_11] = st(S1 | R_OUT | A_IN | IR_RESET | IP_SEL | Z_D)   # LDAX $indirect 2
+
+ROM[0b001_00010011_00] = st(S2 | S1 | Y_IN | R_OUT)   # OUT #imediate
+ROM[0b001_00010011_01] = st(S2 | S1 | Y_IN | R_OUT)   # OUT #imediate
+ROM[0b001_00010011_10] = st(S2 | S1 | Y_IN | R_OUT)   # OUT #imediate
+ROM[0b001_00010011_11] = st(S2 | S1 | Y_IN | R_OUT)   # OUT #imediate
+
+ROM[0b010_00010011_00] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #imediate
+ROM[0b010_00010011_01] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #imediate
+ROM[0b010_00010011_10] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #imediate
+ROM[0b010_00010011_11] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #imediate
+
+with open("Rom_writer\\ROM", "w") as file: # Writing to the file
     ROM.insert(0,"v2.0")
     ROM.insert(1,"raw\n")
     file.write("")

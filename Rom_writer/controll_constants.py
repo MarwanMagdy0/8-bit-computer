@@ -8,7 +8,7 @@ def shift():
         indx=1
     else:
         indx *=2
-    print(str(bin(indx))[2:], len(str(bin(indx))[2:]))
+    # print(str(bin(indx))[2:], len(str(bin(indx))[2:]))
     return indx
 
 # ALU CONTROLL
@@ -40,6 +40,8 @@ FLAGS_SEL   = shift()
 SP_SEL      = shift()
 SP_INC      = shift()
 IR_RESET    = shift()
+RAM_IOB     = shift()
+IP_OUT      = shift()
 
 def st(instruction):
     return str(hex(instruction))[2:]
