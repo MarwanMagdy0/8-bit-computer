@@ -1,37 +1,58 @@
 from operation_codes import *
 CODE = """
-lda %00011000
-out #00
+lda #ff
+    jsr shift_col
+    jsr print_col
+lda #80
+    jsr shift_col
+    jsr print_col
+lda #40
+    jsr shift_col
+    jsr print_col
+lda #20
+    jsr shift_col
+    jsr print_col
+lda #10
+    jsr shift_col
+    jsr print_col
+lda #10
+    jsr shift_col
+    jsr print_col
+lda #20
+    jsr shift_col
+    jsr print_col
+lda #40
+    jsr shift_col
+    jsr print_col
+lda #80
+    jsr shift_col
+    jsr print_col
+lda #ff
+    jsr shift_col
+    jsr print_col
 
-lda #01 ; shift segment
-out #01
-
-lda #00 ; clear control
-out #01
-
-lda %00100100
-out #00
-
-lda #01 ; shift segment
-out #01
-
-lda #00 ; clear control
-out #01
-
-loop:
-    lda %00000000
+halt:
+    lda #00
+    jsr shift_col
+    jsr print_col
+    jmp halt
+shift_col:
     out #00
 
-    lda #01 ; shift segment
+    lda #01
     out #01
-
-    lda #00 ; clear control
+    lda #00
     out #01
+    ret
 
-    lda #02 ; clear control
+print_col:
+    lda #02
     out #01
+    lda #00
+    out #01
+    ret
 
-jmp loop
+
 """
 
 binary_code = "v2.0 raw\n"

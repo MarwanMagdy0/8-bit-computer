@@ -24,6 +24,14 @@ ANDX   = operation_code()
 AND    = operation_code()
 LDAX   = operation_code()
 OUT    = operation_code()
+INX    = operation_code()
+DEX    = operation_code()
+JSR    = operation_code()
+RET    = operation_code()
+PHA    = operation_code()
+PLA    = operation_code()
+PHX    = operation_code()
+PLX    = operation_code()
 def op_from_str2hex(op):
     return str(hex(eval(op)))[2:]
 

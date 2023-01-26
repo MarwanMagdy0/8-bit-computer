@@ -136,6 +136,76 @@ ROM[0b010_00010011_01] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #i
 ROM[0b010_00010011_10] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #imediate
 ROM[0b010_00010011_11] = st(S2 | RAM_IOB | A_OUT | IR_RESET | IP_SEL)   # OUT #imediate
 
+ROM[0b001_00010100_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # INX
+ROM[0b001_00010100_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # INX
+ROM[0b001_00010100_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # INX
+ROM[0b001_00010100_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # INX
+
+ROM[0b001_00010101_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT  | Z_A | CPL_A)   # DEX
+ROM[0b001_00010101_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT  | Z_A | CPL_A)   # DEX
+ROM[0b001_00010101_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT  | Z_A | CPL_A)   # DEX
+ROM[0b001_00010101_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | ALU_TO_X | X_IN | X_OUT  | Z_A | CPL_A)   # DEX
+
+ROM[0b001_00010110_00] = st(S2 | S1 | IP_OUT | Y_IN)   # JSR #imediate 0
+ROM[0b001_00010110_01] = st(S2 | S1 | IP_OUT | Y_IN)   # JSR #imediate 0
+ROM[0b001_00010110_10] = st(S2 | S1 | IP_OUT | Y_IN)   # JSR #imediate 0
+ROM[0b001_00010110_11] = st(S2 | S1 | IP_OUT | Y_IN)   # JSR #imediate 0
+
+ROM[0b010_00010110_00] = st(S2 | S1 | ALU_TO_Y | Y_IN | Y_OUT  | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # JSR #imediate 1
+ROM[0b010_00010110_01] = st(S2 | S1 | ALU_TO_Y | Y_IN | Y_OUT  | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # JSR #imediate 1
+ROM[0b010_00010110_10] = st(S2 | S1 | ALU_TO_Y | Y_IN | Y_OUT  | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # JSR #imediate 1
+ROM[0b010_00010110_11] = st(S2 | S1 | ALU_TO_Y | Y_IN | Y_OUT  | Z_A | CPL_A | CPL_D | ALU_OUT_CPL)   # JSR #imediate 1
+
+ROM[0b011_00010110_00] = st(Y_OUT | R_INP | SP_SEL)   # JSR #imediate 2
+ROM[0b011_00010110_01] = st(Y_OUT | R_INP | SP_SEL)   # JSR #imediate 2
+ROM[0b011_00010110_10] = st(Y_OUT | R_INP | SP_SEL)   # JSR #imediate 2
+ROM[0b011_00010110_11] = st(Y_OUT | R_INP | SP_SEL)   # JSR #imediate 2
+
+ROM[0b100_00010110_00] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JSR #imediate 3
+ROM[0b100_00010110_01] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JSR #imediate 3
+ROM[0b100_00010110_10] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JSR #imediate 3
+ROM[0b100_00010110_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JSR #imediate 3
+
+ROM[0b001_00010111_00] = st(SP_SEL | SP_INC | S1 | S2)   # RET
+ROM[0b001_00010111_01] = st(SP_SEL | SP_INC | S1 | S2)   # RET
+ROM[0b001_00010111_10] = st(SP_SEL | SP_INC | S1 | S2)   # RET
+ROM[0b001_00010111_11] = st(SP_SEL | SP_INC | S1 | S2)   # RET
+
+ROM[0b010_00010111_00] = st(R_OUT | IP_INP | IP_SEL | IR_RESET)   # RET
+ROM[0b010_00010111_01] = st(R_OUT | IP_INP | IP_SEL | IR_RESET)   # RET
+ROM[0b010_00010111_10] = st(R_OUT | IP_INP | IP_SEL | IR_RESET)   # RET
+ROM[0b010_00010111_11] = st(R_OUT | IP_INP | IP_SEL | IR_RESET)   # RET
+
+ROM[0b001_00011000_00] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # pha
+ROM[0b001_00011000_01] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # pha
+ROM[0b001_00011000_10] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # pha
+ROM[0b001_00011000_11] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # pha
+
+ROM[0b001_00011001_00] = st(SP_SEL | SP_INC | S1 | S2)   # pla 0
+ROM[0b001_00011001_01] = st(SP_SEL | SP_INC | S1 | S2)   # pla 0
+ROM[0b001_00011001_10] = st(SP_SEL | SP_INC | S1 | S2)   # pla 0
+ROM[0b001_00011001_11] = st(SP_SEL | SP_INC | S1 | S2)   # pla 0
+
+ROM[0b001_00011001_00] = st(R_OUT | IR_RESET | A_IN)   # pla 1
+ROM[0b001_00011001_01] = st(R_OUT | IR_RESET | A_IN)   # pla 1
+ROM[0b001_00011001_10] = st(R_OUT | IR_RESET | A_IN)   # pla 1
+ROM[0b001_00011001_11] = st(R_OUT | IR_RESET | A_IN)   # pla 1
+
+ROM[0b001_00011010_00] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # phx
+ROM[0b001_00011010_01] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # phx
+ROM[0b001_00011010_10] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # phx
+ROM[0b001_00011010_11] = st(SP_SEL | R_INP | A_OUT | IR_RESET)   # phx
+
+ROM[0b001_00011011_00] = st(SP_SEL | SP_INC | S1 | S2)   # plx 0
+ROM[0b001_00011011_01] = st(SP_SEL | SP_INC | S1 | S2)   # plx 0
+ROM[0b001_00011011_10] = st(SP_SEL | SP_INC | S1 | S2)   # plx 0
+ROM[0b001_00011011_11] = st(SP_SEL | SP_INC | S1 | S2)   # plx 0
+
+ROM[0b001_00011011_00] = st(R_OUT | IR_RESET | X_IN)   # plx 1
+ROM[0b001_00011011_01] = st(R_OUT | IR_RESET | X_IN)   # plx 1
+ROM[0b001_00011011_10] = st(R_OUT | IR_RESET | X_IN)   # plx 1
+ROM[0b001_00011011_11] = st(R_OUT | IR_RESET | X_IN)   # plx 1
+
 with open("Rom_writer\\ROM", "w") as file: # Writing to the file
     ROM.insert(0,"v2.0")
     ROM.insert(1,"raw\n")

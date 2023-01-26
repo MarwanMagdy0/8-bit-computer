@@ -42,6 +42,7 @@ SP_INC      = shift()
 IR_RESET    = shift()
 RAM_IOB     = shift()
 IP_OUT      = shift()
-
+ALU_TO_X    = shift()
+ALU_TO_Y    = shift()
 def st(instruction):
     return str(hex(instruction))[2:]
