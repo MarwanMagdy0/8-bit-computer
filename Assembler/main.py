@@ -1,50 +1,22 @@
 from operation_codes import *
 CODE = """
-lda #ff
+ldx #0b
+loop:
+    dex
+    ldax word
     jsr shift_col
     jsr print_col
-lda #80
-    jsr shift_col
-    jsr print_col
-lda #40
-    jsr shift_col
-    jsr print_col
-lda #20
-    jsr shift_col
-    jsr print_col
-lda #10
-    jsr shift_col
-    jsr print_col
-lda #10
-    jsr shift_col
-    jsr print_col
-lda #20
-    jsr shift_col
-    jsr print_col
-lda #40
-    jsr shift_col
-    jsr print_col
-lda #80
-    jsr shift_col
-    jsr print_col
-lda #ff
-    jsr shift_col
-    jsr print_col
-
+    jz halt
+    jmp loop
 halt:
-    lda #00
-    jsr shift_col
-    jsr print_col
     jmp halt
 shift_col:
     out #00
-
     lda #01
     out #01
     lda #00
     out #01
     ret
-
 print_col:
     lda #02
     out #01
@@ -52,6 +24,7 @@ print_col:
     out #01
     ret
 
+.word = ff 80 40 20 10 10 20 40 80 ff
 
 """
 
@@ -74,15 +47,23 @@ for operation in code_list_nospaces:
     elif len(splited_operation)==2:
         instruction_pointer +=2
 
-    elif len(splited_operation) ==3:
+    else:
         if "=" in operation:
-            variables[splited_operation[0]] = splited_operation[2]
+            print(splited_operation[0])
+            if "." in splited_operation[0]:
+                variables[splited_operation[0][1:]] = get_label_address(instruction_pointer)
+            else:
+                variables[splited_operation[0]] = splited_operation[2]
             continue
 
 instruction_pointer = 0
 for operation in code_list_nospaces:
     splited_operation = operation.split()
     splited_operation = filtter_comments(splited_operation)
+
+    if splited_operation==[]:
+        continue
+
     if len(splited_operation)==1:
         if ":" in operation:
             continue
@@ -95,17 +76,21 @@ for operation in code_list_nospaces:
         if splited_operation[1].startswith("#"):
             binary_code+= op_from_str2hex(splited_operation[0].upper()) + " " + splited_operation[1][1:] + " "
             after_proccessing_code +=f"{hex(instruction_pointer)}"[2:]+":"+" "+splited_operation[0].upper() + " " + splited_operation[1]+"  >>"+op_from_str2hex(splited_operation[0].upper())+":"+splited_operation[1][1:]+"\n"
+        
         elif splited_operation[1].startswith("%"):
             binary_code+= op_from_str2hex(splited_operation[0].upper()) + " " + bin2hex(splited_operation[1][1:]) + " "
             after_proccessing_code +=f"{hex(instruction_pointer)}"[2:]+":"+" "+splited_operation[0].upper() + " " + splited_operation[1]+"  >>"+op_from_str2hex(splited_operation[0].upper())+":"+bin2hex(splited_operation[1][1:])+"\n"
+        
         elif splited_operation[1].startswith("$"):
             binary_code+= op_from_str2hex(splited_operation[0].upper()+"_IN") + " " + splited_operation[1][1:] + " "
             after_proccessing_code +=f"{hex(instruction_pointer)}"[2:]+":"+" "+splited_operation[0].upper() + " " + splited_operation[1]+"  >>"+op_from_str2hex(splited_operation[0].upper()+"_IN")+":"+splited_operation[1][1:]+"\n"
         instruction_pointer +=2
 
-    elif len(splited_operation) ==3:
-        if "=" in operation:
-            continue
+    else:
+        if "=" in operation and "." in operation:
+            for db in splited_operation[2:]:
+                binary_code+= db +" "
+        
 
 print("after proccessing...")
 print(after_proccessing_code)
