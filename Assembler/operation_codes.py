@@ -32,6 +32,10 @@ PHA    = operation_code()
 PLA    = operation_code()
 PHX    = operation_code()
 PLX    = operation_code()
+CMPX   = operation_code()
+CMP    = operation_code()
+JNZ    = operation_code()
+JNC    = operation_code()
 def op_from_str2hex(op):
     return str(hex(eval(op)))[2:]
 

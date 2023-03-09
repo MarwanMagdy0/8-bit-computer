@@ -1,15 +1,31 @@
 from operation_codes import *
 CODE = """
-ldx #0b
 loop:
-    dex
-    ldax word
-    jsr shift_col
-    jsr print_col
-    jz halt
+    ldx #21
+    jsr show_frame
+    jsr show_screen
+    ldx #21
+    jsr show_frame2
+    jsr show_screen
     jmp loop
-halt:
-    jmp halt
+
+show_frame:
+    dex
+    ldax frame1
+    jsr shift_col
+    jz back_to_main
+    jmp show_frame
+
+show_frame2:
+    dex
+    ldax frame2
+    jsr shift_col
+    jz back_to_main
+    jmp show_frame2
+
+back_to_main:
+    ret
+
 shift_col:
     out #00
     lda #01
@@ -17,15 +33,15 @@ shift_col:
     lda #00
     out #01
     ret
-print_col:
+show_screen:
     lda #02
     out #01
     lda #00
     out #01
     ret
 
-.word = ff 80 40 20 10 10 20 40 80 ff
-
+.frame1 = 0 0 0 0 0 0 0 0 0 0 0 0 8 10 d3 fc d3 10 8 0 0 0 0 0 0 0 0 0 0 0 0 0
+.frame2 = 0 0 0 0 0 0 0 0 0 0 0 0 20 21 e2 fc e2 21 20 0 0 0 0 0 0 0 0 0 0 0 0 0
 """
 
 binary_code = "v2.0 raw\n"
@@ -51,9 +67,13 @@ for operation in code_list_nospaces:
         if "=" in operation:
             print(splited_operation[0])
             if "." in splited_operation[0]:
+                print(instruction_pointer)
                 variables[splited_operation[0][1:]] = get_label_address(instruction_pointer)
+                for db in splited_operation[2:]:
+                    instruction_pointer+=1
             else:
                 variables[splited_operation[0]] = splited_operation[2]
+                
             continue
 
 instruction_pointer = 0
@@ -90,6 +110,7 @@ for operation in code_list_nospaces:
         if "=" in operation and "." in operation:
             for db in splited_operation[2:]:
                 binary_code+= db +" "
+                instruction_pointer+=1
         
 
 print("after proccessing...")
@@ -100,6 +121,6 @@ print(f"    variables:", variables, "\n")
 print("code:")
 print(binary_code[9:])
 
-with open("Assembler\\code", "w") as file: # Writing to the file
+with open("output", "w") as file: # Writing to the file
     file.write("")
     file.write(binary_code)

@@ -56,13 +56,13 @@ ROM[0b001_00001000_01] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JM
 ROM[0b001_00001000_10] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JMP #imediate
 ROM[0b001_00001000_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JMP #imediate
 
-ROM[0b001_00001001_00] = st(IR_RESET  | S1 | S2)   # NOP
+ROM[0b001_00001001_00] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
 ROM[0b001_00001001_01] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # Jz #imediate
-ROM[0b001_00001001_10] = st(IR_RESET  | S1 | S2)   # NOP
-ROM[0b001_00001001_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # Jz #imediate
+ROM[0b001_00001001_10] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
+ROM[0b001_00001001_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT | IP_SEL)   # Jz #imediate
 
-ROM[0b001_00001010_00] = st(IR_RESET  | S1 | S2)   # NOP
-ROM[0b001_00001010_01] = st(IR_RESET  | S1 | S2)   # NOP
+ROM[0b001_00001010_00] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
+ROM[0b001_00001010_01] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
 ROM[0b001_00001010_10] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JC #imediate
 ROM[0b001_00001010_11] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JC #imediate
 
@@ -206,8 +206,30 @@ ROM[0b001_00011011_01] = st(R_OUT | IR_RESET | X_IN)   # plx 1
 ROM[0b001_00011011_10] = st(R_OUT | IR_RESET | X_IN)   # plx 1
 ROM[0b001_00011011_11] = st(R_OUT | IR_RESET | X_IN)   # plx 1
 
+ROM[0b001_00011100_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | CPL_A | ALU_OUT_CPL | Y_IN)   # CMPX
+ROM[0b001_00011100_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | CPL_A | ALU_OUT_CPL | Y_IN)   # CMPX
+ROM[0b001_00011100_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | CPL_A | ALU_OUT_CPL | Y_IN)   # CMPX
+ROM[0b001_00011100_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | X_OUT | CPL_A | ALU_OUT_CPL | Y_IN)   # CMPX
+
+ROM[0b001_00011101_00] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | IP_SEL | CPL_A | ALU_OUT_CPL | Y_IN)   # CMP #imediate
+ROM[0b001_00011101_01] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | IP_SEL | CPL_A | ALU_OUT_CPL | Y_IN)   # CMP #imediate
+ROM[0b001_00011101_10] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | IP_SEL | CPL_A | ALU_OUT_CPL | Y_IN)   # CMP #imediate
+ROM[0b001_00011101_11] = st(IR_RESET | FLAGS_SEL | S2 | S1 | R_OUT | IP_SEL | CPL_A | ALU_OUT_CPL | Y_IN)   # CMP #imediate
+
+ROM[0b001_00011110_00] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT | IP_SEL)   # JNZ #imediate
+ROM[0b001_00011110_01] = st(IR_RESET  | S1 | S2 | IP_SEL)    # NOP
+ROM[0b001_00011110_10] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT | IP_SEL)   # JNZ #imediate
+ROM[0b001_00011110_11] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
+
+ROM[0b001_00011111_00] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JNC #imediate
+ROM[0b001_00011111_01] = st(S2 | S1 | IP_SEL | IP_INP | IR_RESET | R_OUT)   # JNC #imediate
+ROM[0b001_00011111_10] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
+ROM[0b001_00011111_11] = st(IR_RESET  | S1 | S2 | IP_SEL)   # NOP
+
+
 with open("Rom_writer\\ROM", "w") as file: # Writing to the file
     ROM.insert(0,"v2.0")
     ROM.insert(1,"raw\n")
     file.write("")
     file.write(" ".join(ROM))
+

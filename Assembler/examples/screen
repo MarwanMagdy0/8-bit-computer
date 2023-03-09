@@ -1,0 +1,26 @@
+ldx #21
+loop:
+    dex
+    ldax word
+    jsr shift_col
+    jsr print_col
+    jz halt
+    jmp loop
+halt:
+    ldx #21
+    jmp loop
+shift_col:
+    out #00
+    lda #01
+    out #01
+    lda #00
+    out #01
+    ret
+print_col:
+    lda #02
+    out #01
+    lda #00
+    out #01
+    ret
+
+.word = 84 8c 94 a4 c4 84 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
